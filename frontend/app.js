@@ -1,5 +1,6 @@
 // Acoustic Sound Analyzer front end: upload a file, call /api/analyze, render the report.
 
+const API_BASE = "https://ai-project-55vv.onrender.com";
 const $ = (id) => document.getElementById(id);
 const fileInput = $("file-input");
 const dropzone = $("dropzone");
@@ -90,7 +91,8 @@ analyzeBtn.addEventListener("click", async () => {
   showError("");
   statusEl.textContent = "Analyzing… this can take a while for long recordings.";
   try {
-    const res = await fetch(`/api/analyze?filename=${encodeURIComponent(file.name)}`, {
+    
+      const res = await fetch(`${API_BASE}/api/analyze?filename=${encodeURIComponent(file.name)}`, {
       method: "POST",
       headers: { "Content-Type": "application/octet-stream" },
       body: file,
